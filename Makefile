@@ -159,11 +159,6 @@ test-unit-watch: ## launch unit tests and watch for changes
 	yarn test-unit --watch; \
 
 test-e2e: ## launch end-to-end tests (ex. BROWSER=firefox make test-e2e)
-	@if [ "$(build)" != "false" ]; then \
-		echo 'Building example code (call "make build=false test-e2e" to skip the build)...'; \
-		cd examples/simple && BABEL_ENV=cjs yarn build; \
-	fi
-
 	@NODE_ENV=test cd cypress && yarn test
 
 

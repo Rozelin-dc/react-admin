@@ -15,7 +15,7 @@ export default defineConfig({
             on('before:browser:launch', (browser = {}, launchOptions) => {
                 // Fix for Cypress 4:
                 // https://docs.cypress.io/api/plugins/browser-launch-api.html#Usage
-                if (browser.name === 'chrome') {
+                if (browser.name === 'edge') {
                     launchOptions.args.push(
                         '--disable-blink-features=RootLayerScrolling'
                     );
@@ -25,6 +25,12 @@ export default defineConfig({
                 }
             });
             on('file:preprocessor', vitePreprocessor());
+            on('task', {
+                log(message) {
+                    console.log(`[cy.log] ${message}`);
+                    return null;
+                },
+            });
         },
         baseUrl: 'http://localhost:8080',
         specPattern: 'e2e/**/*.cy.{js,jsx,ts,tsx}',
